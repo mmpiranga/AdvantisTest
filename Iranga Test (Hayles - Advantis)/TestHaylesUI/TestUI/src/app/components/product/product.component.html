@@ -1,0 +1,84 @@
+<div class="col-md-12">
+  <div class="col-md-12">
+    <div style="text-align: center">
+      <h3>Product Details</h3>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-6">
+    </div>
+    <div class="col-md-6">
+      <form name="fProduct" #formProduct="ngForm" novalidate>
+        <div class="col-md-12 form-group">
+          <label>Product Name</label>
+          <input type="text" class="form-control" id="pname" [(ngModel)]="product.Name" name="pname" #prodName="ngModel"
+            required>
+          <div [hidden]="prodName.valid || prodName.pristine" class="alert alert-danger">
+            Name is required
+          </div>
+        </div>
+        <div class="col-md-12 form-group">
+          <label>Discount</label>
+          <input type="number" class="form-control" id="pdiscount" [(ngModel)]="product.Discount" name="pdiscount">
+        </div>
+        <div class="col-md-12 form-group">
+          <label>Quantity</label>
+          <input type="number" class="form-control" id="pquantity" [(ngModel)]="product.Quantity" name="pquantity">
+        </div>
+        <div class="col-md-12 form-group">
+          <label>Total Amount</label>
+          <input type="number" class="form-control" id="ptotalAmount" [(ngModel)]="product.TotalAmount"
+            name="ptotalAmount">
+        </div>
+        <div class="col-md-12 form-group">
+          <label>Balance Amount</label>
+          <input type="number" class="form-control" id="pbalanceAmount" [(ngModel)]="product.BalanceAmount"
+            name="pbalanceAmount">
+        </div>
+        <div class="col-md-12" *ngIf="!isEditMode">
+          <button type="submit" class="btn btn-success" [disabled]="!formProduct.form.valid"
+            (click)="saveProduct(product)">Save</button>&nbsp;
+          <button type="button" class="btn btn-warning" (click)="clearForm()">Clear</button>
+        </div>
+        <div class="col-md-12" *ngIf="isEditMode">
+          <button type="submit" class="btn btn-success" [disabled]="!formProduct.form.valid"
+            (click)="updateProduct(product)">Update</button>&nbsp;
+          <button type="button" class="btn btn-warning" (click)="clearForm()">Clear</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="col-md-12">
+  <div class="container">
+    <table class="table table-hover table-striped">
+      <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Discount</th>
+          <th>Quantity</th>
+          <th>Total Amount</th>
+          <th>Balance Amount</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prod of products">
+          <td>{{prod.ID}}</td>
+          <td>{{prod.Name}}</td>
+          <td>{{prod.Discount}}</td>
+          <td>{{prod.Quantity}}</td>
+          <td>{{prod.TotalAmount}}</td>
+          <td>{{prod.BalanceAmount}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" (click)="editProduct(prod)">Edit</button>&nbsp;
+            <button type="button" class="btn btn-danger" (click)="deleteProduct(prod.Id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
